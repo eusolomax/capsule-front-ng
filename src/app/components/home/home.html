@@ -1,0 +1,19 @@
+<p>Calculadora daora</p>
+
+<div style="display: flex">
+  <input [(ngModel)]="n1" type="number" placeholder="n1" />
+  
+  <h1>+</h1>
+  
+  <input [(ngModel)]="n2" type="number" placeholder="n2" />
+  
+</div>
+
+<h1>Resultado: {{result()}}</h1>
+<h1 style="color: red;">prop de fora: {{context}}</h1>
+<p>é </p>
+@if(result() % 2) {
+   <p>impar</p>
+} @else {
+   <p>par</p>
+}
