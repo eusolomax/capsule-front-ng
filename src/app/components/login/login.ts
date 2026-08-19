@@ -4,7 +4,7 @@ import { ButtonDirective, ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { LabelModule } from 'primeng/label';
-import { AuthService } from '../api/authService';
+import { AuthService } from '../../api/authService';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from 'primeng/api';

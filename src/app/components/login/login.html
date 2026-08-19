@@ -7,7 +7,7 @@
 <div class="w-full h-100 flex items-center justify-center p-4">
   <p-card [style]="{ background: 'none' }" class="w-full max-w-sm">
     <form class="space-y-6 mt-3">
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-1">
         <label pLabel for="email">Email</label>
         <input [formField]="loginForm.email" pInputText id="email" type="email" />
         @if (loginForm.email().invalid() && loginForm.email().touched()) {
@@ -17,10 +17,10 @@
         }
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-1">
         <div class="flex items-center justify-between">
           <label pLabel for="password">Password</label>
-          <button type="button" pButton variant="link" class="p-0">Forgot password?</button>
+          <button disabled type="button" pButton variant="link" class="p-0">Forgot password?</button>
         </div>
 
         <input [formField]="loginForm.password" pInputText id="password" type="password" />
@@ -47,13 +47,13 @@
           Login
         </button>
 
-        <!-- <button type="button" pButton severity="secondary" [outlined]="true" class="w-full">
+        <button disabled type="button" pButton severity="secondary" [outlined]="true" class="w-full">
           Login with Google
-        </button> -->
+        </button>
 
         <div class="mt-2 text-center text-surface-500 text-sm">
           Don't have an account?
-          <button type="button" pButton variant="link" class="p-0">Sign up</button>
+          <button (click)="this.router.navigate(['/register'])" type="button" pButton variant="link" class="p-0">Sign up</button>
         </div>
       </div>
     </ng-template>
