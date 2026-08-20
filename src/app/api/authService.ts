@@ -15,6 +15,10 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/auth`;
 
+  isAuthenticated() {
+    return !!localStorage.getItem("token");
+  }
+
   postLogin(login: loginForm) {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, login);
   }

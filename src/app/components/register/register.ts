@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   imports: [ToastModule, ButtonModule, RippleModule, CardModule, ButtonModule, InputTextModule, LabelModule, FormField],
   providers: [MessageService],
   templateUrl: './register.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './register.css',
 })
 export class Register {
@@ -24,7 +23,7 @@ export class Register {
   readonly router = inject(Router);
 
   readonly logoPath = '/assets/resona-logo.svg';
-  isSubmiting: boolean = false;
+  isSubmiting = signal(false);
   register = signal<registerForm>({
     name: "",
     email: "",
@@ -41,16 +40,16 @@ export class Register {
   }
 
   submit() {
-    this.isSubmiting = true;
+    this.isSubmiting.set(true);
 
     this.authService.postRegister(this.register()).subscribe({
       next: response => {
         this.router.navigate(['/login'])
       },
       error: error => {
-        this.showError()
-        this.isSubmiting = false;
-      },
+        this.isSubmiting.set(false);
+        if (error.status !== 0 && error.status <= 500) { this.showError() }
+      }
     });
   }
 }

@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
   imports: [ToastModule, ButtonModule, RippleModule, CardModule, ButtonModule, InputTextModule, LabelModule, FormField],
   providers: [MessageService],
   templateUrl: './login.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.css',
 })
 export class Login {
@@ -24,7 +23,7 @@ export class Login {
   readonly router = inject(Router);
 
   readonly logoPath = '/assets/resona-logo.svg';
-  isSubmiting: boolean = false;
+  isSubmiting = signal(false);
   login = signal<loginForm>({
     email: "",
     password: ""
@@ -39,7 +38,7 @@ export class Login {
   }
 
   submit() {
-    this.isSubmiting = true;
+    this.isSubmiting.set(true);
 
     this.authService.postLogin(this.login()).subscribe({
       next: response => {
@@ -47,9 +46,9 @@ export class Login {
         this.router.navigate(['/home'])
       },
       error: error => {
-        this.showError()
-        this.isSubmiting = false;
-      },
+        this.isSubmiting.set(false);
+        if (error.status !== 0 && error.status <= 500) { this.showError() }
+      }
     });
   }
 }

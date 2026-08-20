@@ -6,11 +6,12 @@ import Aura from '@primeuix/themes/aura';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth';
+import { HandleServerError } from './interceptors/handleServerError';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, HandleServerError])),
     provideRouter(routes),
     providePrimeNG({
       theme: {
