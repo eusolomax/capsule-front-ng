@@ -1,0 +1,47 @@
+<div class="group flex flex-col items-start w-full px-2 py-1 bg-white/6 rounded-lg">
+  <!-- track details -->
+  <div class="flex flex-col gap-0.5">
+    <span class="text-xl font-semibold text-surface-900 truncate leading-tight">
+      {{ data.value.track_name }}
+    </span>
+
+    <span class="text-[10px] font-semibold tracking-[0.12em] uppercase text-white/70 truncate">
+      {{ data.value.track_description }}
+    </span>
+  </div>
+
+  <!-- waveform -->
+  <div
+    id="waveform"
+    class="w-full cursor-pointer h-10 mt-3 overflow-hidden opacity-80 group-hover:opacity-100 transition-opacity"
+  ></div>
+
+  <div id="wave-timeline" class="hidden"></div>
+
+  <!-- controls -->
+  <div class="flex items-center gap-2 mt-2 text-xs text-surface-400">
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        (click)="onPlayButtonPressed()"
+        class="text-white/50 hover:text-white text-[15px] font-medium cursor-pointer"
+      >
+        Play
+      </button>
+
+      <button
+        type="button"
+        (click)="onStopButtonPressed()"
+        class="text-white/50 hover:text-white text-[15px] font-medium cursor-pointer"
+      >
+        Stop
+      </button>
+    </div>
+
+    <span class="text-white/30">•</span>
+
+    <p class="text-white/50 text-[15px] font-medium">
+      {{ this.data.value.duration_seconds | durationPipe }}
+    </p>
+  </div>
+</div>
